@@ -26,8 +26,8 @@ provider "artifactory" {
 
 # Create a new repository in Artifactory
 
-resource "artifactory_local_terraform_module_repository" "mk-mod-terra-local" {
-  key = "mk-mod-terra-local"
+resource "artifactory_local_terraform_module_repository" "manoj-terra-mod-local" {
+  key = "manoj-terra-mod-local"
 
   description = "Repo created by Terraform Provider Artifactory"
 
