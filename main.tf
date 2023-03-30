@@ -13,6 +13,13 @@ terraform {
   }
 
 }
+cloud {
+    organization = "terratestorg"
+
+    workspaces {
+      name = "learn-terraform-cloud"
+    }
+  }
 
 # Configure the Artifactory provider
 
