@@ -1,4 +1,11 @@
 terraform {
+  cloud {
+    organization = "terratestorg"
+
+    workspaces {
+      name = "Clispace"
+    }
+  }
 
   required_providers {
 
@@ -13,13 +20,7 @@ terraform {
   }
 
 }
-cloud {
-    organization = "terratestorg"
 
-    workspaces {
-      name = "learn-terraform-cloud"
-    }
-  }
 
 # Configure the Artifactory provider
 
