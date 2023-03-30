@@ -1,28 +1,35 @@
-provider "aws" {
-  region = var.region
-}
+terraform {
 
-data "aws_ami" "ubuntu" {
-  most_recent = true
+  required_providers {
 
-  filter {
-    name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
+    artifactory = {
+
+      source = "jfrog/artifactory"
+
+      version = "7.4.3"
+
+    }
+
   }
 
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-
-  owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "ubuntu" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
+# Configure the Artifactory provider
 
-  tags = {
-    Name = var.instance_name
-  }
+provider "artifactory" {
+
+  url           = "https://sandeepmkp.jfrog.io/artifactory"
+
+  access_token  = "eyJ2ZXIiOiIyIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYiLCJraWQiOiJEUjBFNTdnRHVycXpNZFR2TVJfajYwRGhVbXkyc3JYWGYwZ2tyVXhUSkhjIn0.eyJzdWIiOiJqZmFjQDAxZnM0NTF3NDJ5OHBnMTlydGF5cmEwNGN0XC91c2Vyc1wvbWFub2oiLCJzY3AiOiJhcHBsaWVkLXBlcm1pc3Npb25zXC9hZG1pbiIsImF1ZCI6WyJqZnJ0QCoiLCJqZmFjQCoiLCJqZmV2dEAqIiwiamZtZEAqIiwiamZjb25AKiJdLCJpc3MiOiJqZmZlQDAxZnM0NTF3NDJ5OHBnMTlydGF5cmEwNGN0IiwiZXhwIjoxNjgyNzUxMDI4LCJpYXQiOjE2ODAxNTkwMjgsImp0aSI6Ijc0YjhlZjExLTU5YjctNDA4Mi1iY2Y5LTNlOWQzZjBjNzY5YyJ9.VPt_aWLdKBj0_DBWpmUVOmt0VZxFap4yighSo44TJzxuSOFN52GR5uPTsh7v1neTcv31tLMDS5HVMwwejie1dA9uMAxlREA-leNBzuPyr5A6zrCqfOdq-SX1XK2yzLqQXX-40Jwu10dsJo959MN3xIcWhDK7t4Hybb-1J2TIgS5Qni7F9ZKV4CzZjx4xMcg0iSMeVTRcxpM4hoXQ0SzO1GpCvTroixiajUK_T6xGbQ0EcJiyECRySpuZctSnE9HI6XhKzZoRUHnb_vrCl1nbI9TF5SmNOUfNTXEAY5BmYPI2boIoTwn0TnFqR3uEH1PZQE6D_zV19a83n_9M_KJCqg"
+
 }
+
+# Create a new repository in Artifactory
+
+resource "artifactory_local_terraform_module_repository" "test-terra-mod-local1" {
+  key = "test-terra-mod-local1"
+
+  description = "Repo created by Terraform Provider Artifactory"
+
+}
+
