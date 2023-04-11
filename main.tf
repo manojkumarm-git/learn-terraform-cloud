@@ -8,7 +8,11 @@ terraform {
   }
 
   required_providers {
-
+  
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.56.0"
+    }
     artifactory = {
 
       source = "jfrog/artifactory"
@@ -32,12 +36,7 @@ provider "artifactory" {
 
 }
 
-# Create a new repository in Artifactory
-
-resource "artifactory_local_terraform_module_repository" "manoj-terra-mod-local" {
-  key = "manoj-terra-mod-local"
-
-  description = "Repo created by Terraform Provider Artifactory"
+module "aft" {
+  source  = "sandeepmkp.jfrog.io/test-terraform__aws-ia/control_tower_account_factory/aws"
 
 }
-
