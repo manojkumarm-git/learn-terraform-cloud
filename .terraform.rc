@@ -1,0 +1,8 @@
+provider_installation {
+    direct {
+        exclude = ["registry.terraform.io/*/*"]
+    }
+    network_mirror {
+        url = "https://sandeepmkp.jfrog.io/artifactory/api/terraform/test-terraform/providers/"
+    }
+}
