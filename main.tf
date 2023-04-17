@@ -31,5 +31,6 @@ provider "artifactory" {
 module "mymodule" {
 
     source  = "clouddsein.jfrog.io/mk-terraform__myns/mymodule/myprovider/"
+    version = "1.0.0"
 
 }
