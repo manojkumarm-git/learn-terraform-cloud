@@ -3,6 +3,6 @@ provider_installation {
         exclude = ["registry.terraform.io/*/*"]
     }
     network_mirror {
-        url = "https://sandeepmkp.jfrog.io/artifactory/api/terraform/test-terraform/providers/"
+        url = "https://clouddsein.jfrog.io/artifactory/api/terraform/mk-terraform/providers/"
     }
 }
