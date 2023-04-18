@@ -3,7 +3,7 @@ terraform {
     organization = "terratestorg"
 
     workspaces {
-      name = "Clispace"
+      name = "learn-terraform-cloud"
     }
   }
 
@@ -13,7 +13,7 @@ terraform {
 
       source = "jfrog/artifactory"
 
-      version = "7.4.3"
+      version = "7.5.0"
 
     }
 
@@ -30,7 +30,6 @@ provider "artifactory" {
 
 module "mymodule" {
 
-    source  = "https://clouddsein.jfrog.io/mk-terraform__myns/mymodule/myprovider/"
-    version = "1.0.0"
+    source  = "clouddsein.jfrog.io/mk-terraform__myns/mymodule/myprovider/"
 
 }
