@@ -29,6 +29,6 @@ provider "artifactory" {
 }
 module "mymodule" {
 
-    source  = "https://hts2.jfrog.io/mk-terraform__myns/mymodule/myprovider/"
+    source  = "https://hts2.jfrog.io/artifactory/mk-terraform__myns/mymodule/myprovider/1.0.0.zip"
 
 }
