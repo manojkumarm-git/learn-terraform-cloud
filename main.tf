@@ -1,34 +1,49 @@
 terraform {
   cloud {
-    organization = "terratestorg"
-
+    organization = "mutualofenumclaw"
     workspaces {
-      name = "learn-terraform-cloud"
+      name = "terraform-aws-control_tower_account_factory"
     }
   }
-
   required_providers {
-  
-    artifactory = {
-
-      source = "jfrog/artifactory"
-
-      version = "7.11.1"
-
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.56.0"
     }
-
+    artifactory = {
+      source = "jfrog/artifactory"
+      version = "7.11.1"
+    }
   }
-
 }
-
+provider "aws" {
+  region     = var.aws_region
+  access_key = var.aws_access_key_id
+  secret_key = var.aws_secret_access_key
+}
 provider "artifactory" {
-
-  url           = "https://hts2.jfrog.io/artifactory"
-
-  access_token  = "eyJ2ZXIiOiIyIiwidHlwIjoiSldUIiwiYWxnIjoiUlMyNTYiLCJraWQiOiJ5ek11SE53Ukhfei0yTmJ1UWpwZVhXdFRqemJyWnVGcUtJRldvZXdYQW1VIn0.eyJzdWIiOiJqZmFjQDAxZThoa3NueTVndmthMTRhYThna2owYzdhL3VzZXJzL21hbm9qIiwic2NwIjoiYXBwbGllZC1wZXJtaXNzaW9ucy9hZG1pbiIsImF1ZCI6IipAKiIsImlzcyI6ImpmZmVAMDFlOGhrc255NWd2a2ExNGFhOGdrajBjN2EiLCJpYXQiOjE2ODMxODU5MjUsImp0aSI6IjI5MTAxOTM5LTgxNTAtNDZiZi04ZWFhLWM5ZDVlOWEyNzljOCJ9.EftF0jf3Sj3EsQChPCsTceuzDNFVeeYLhUYWTgQ-dKBgF04MlKu3ol3MWATv14DvJwkroaIPkd8XFS41j6nSe5ZHnMhV3YO-LdYwZpDwXVVvZoBntzPXqpzLiRh6nBG26I3L9ouv0AAPR8xz_DIJnZe2HXvJOglVNhMByhDwHGTsKnwTni2hi6LnE23ZT1Zrrdq0hJkrIyRCnagBtXiWspT5mXuFcdKTX-zIwJa7V9Ksy8eHZg2gSWNTI5hbN27tR7bh7GU7D9hRch5kf7TFHKcylCptPMA48HPTyW0WGf5iNbvo5BcCdbPlVj8xH9Qx06rPiuQFJMwZXjsRGuWVEQ"
+  url           = "https://moetech.jfrog.io/artifactory"
+  access_token  = "removed"
 }
-module "mymodule" {
+module "aft" {
+  source  = "moetech.jfrog.io/terraform__aws-ia/control_tower_account_factory/aws"
 
-    source  = "hts2.jfrog.io/mk-terraform__myns/mymodule/myprovider"
+  # Required Parameters
+  ct_management_account_id    = "211478285720"
+  log_archive_account_id      = "316241107683"
+  audit_account_id            = "017855766036"
+  aft_management_account_id   = "008782125710"
+  ct_home_region              = "us-west-2"
+  tf_backend_secondary_region = "us-east-1"
 
+  # Optional Parameters
+  terraform_distribution = "tfc"
+  vcs_provider           = "codecommit"
+  terraform_org_name     = "mutualofenumclaw"
+  terraform_token        = "removed"
+
+  # Optional Feature Flags
+  aft_feature_delete_default_vpcs_enabled = true
+  aft_feature_cloudtrail_data_events      = false
+  aft_feature_enterprise_support          = false
 }
